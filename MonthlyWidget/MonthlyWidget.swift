@@ -15,6 +15,7 @@ struct Provider: IntentTimelineProvider {
         DayEntry(date: Date(), configuration: ConfigurationIntent())
     }
 
+    // give me a snapshot how the widget looks right now
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (DayEntry) -> ()) {
         let entry = DayEntry(date: Date(), configuration: configuration)
         completion(entry)
@@ -24,12 +25,15 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [DayEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        // Generate a timeline consisting of seven entries an day apart, starting from the current date.
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = DayEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+        for dayOffset in 0 ..< 7 {
+            let entryDate = Calendar.current.date(byAdding: .day, value: dayOffset, to: currentDate)!
+            print("entryDate: \(entryDate)")
+            let startOfDate = Calendar.current.startOfDay(for: entryDate)
+            print("startOfDate: \(startOfDate)")
+            let entry = DayEntry(date: startOfDate, configuration: configuration)
+            entries.append(entry) // adds 7 day entries
         }
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
