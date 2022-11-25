@@ -26,10 +26,13 @@ struct Provider: IntentTimelineProvider {
         var entries: [DayEntry] = []
 
         // Generate a timeline consisting of seven entries an day apart, starting from the current date.
-        let currentDate = Date()
+        let currentDate = Date() // the current date is the date AND the time (eg. 24/8 2:50pm)
         for dayOffset in 0 ..< 7 {
+            // add 1 day to 0
             let entryDate = Calendar.current.date(byAdding: .day, value: dayOffset, to: currentDate)!
             print("entryDate: \(entryDate)")
+            // we want to switch over our date at midnight
+            // so we set the start of the day to midnight (and not some random time)
             let startOfDate = Calendar.current.startOfDay(for: entryDate)
             print("startOfDate: \(startOfDate)")
             let entry = DayEntry(date: startOfDate, configuration: configuration)
@@ -90,8 +93,9 @@ struct MonthlyWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             MonthlyWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Monthly Style Widget")
+        .description("The theme of the widget changes based on the month.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
