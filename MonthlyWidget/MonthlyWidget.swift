@@ -25,10 +25,10 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [DayEntry] = []
 
-        // Generate a timeline consisting of seven entries an day apart, starting from the current date.
+        // Generate a timeline consisting of seven entries a day apart, starting from the current date.
         let currentDate = Date() // the current date is the date AND the time (eg. 24/8 2:50pm)
         for dayOffset in 0 ..< 7 {
-            // add 1 day to 0
+            // add 1 day to 0...
             let entryDate = Calendar.current.date(byAdding: .day, value: dayOffset, to: currentDate)!
             print("entryDate: \(entryDate)")
             // we want to switch over our date at midnight
@@ -53,27 +53,33 @@ struct DayEntry: TimelineEntry {
 // The SwiftUI view
 struct MonthlyWidgetEntryView : View {
     var entry: DayEntry
+    var config: MonthConfig
+
+    init(entry: DayEntry) {
+        self.entry = entry
+        self.config = MonthConfig.determineConfig(from: entry.date)
+    }
 
     var body: some View {
         ZStack {
             ContainerRelativeShape()
-                .fill(.gray.gradient)
+                .fill(config.backgroundColor.gradient)
 
             VStack(spacing: 4) {
                 HStack {
-                    Text("⛄️")
+                    Text(config.emojiText)
                         .font(.title)
                     Text(entry.date.weekdayDisplayFormat)
                         .font(.title2)
                         .fontWeight(.bold)
                         .minimumScaleFactor(0.6)
-                        .foregroundColor(.black.opacity(0.5))
+                        .foregroundColor(config.weekdayTextColor)
                     Spacer()
                 }
 
                 Text(entry.date.dayDisplayFormat)
                     .font(.system(size: 80, weight: .heavy))
-                    .padding(2)
+                    .foregroundColor(config.dayTextColor)
             }
             .padding()
         }
@@ -101,8 +107,15 @@ struct MonthlyWidget: Widget {
 
 struct MonthlyWidget_Previews: PreviewProvider {
     static var previews: some View {
-        MonthlyWidgetEntryView(entry: DayEntry(date: Date(), configuration: ConfigurationIntent()))
+        MonthlyWidgetEntryView(entry: DayEntry(date: dateToDisplay(month: 10, day: 10), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+
+    // helper to test it
+    static func dateToDisplay(month: Int, day: Int) -> Date {
+        let components = DateComponents(calendar: Calendar.current, year: 2022, month: month, day: day)
+
+        return Calendar.current.date(from: components)!
     }
 }
 
