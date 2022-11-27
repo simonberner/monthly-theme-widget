@@ -45,3 +45,13 @@ A simple Date Widget that changes the day at midnight and its theme every month.
 ![Monthly Widget](monthly-theme-widget.png)
 
 ## Learnings
+- A Widget comes in 4 "fixed" sizes: systemSmall, systemMedium, systemLarge, systemExtraLarge
+- The shape of a Widget is given
+- The content of a widget can only be implemented with SwiftUI (no UIKit)
+- The IntentTimelineProvider creates the timeline of the widget when to update its content:
+    - placehoder: dummy data (in case there is no data from the snapshot eg. network call needed)
+    - getSnapshot: how does the widget look right now (this state is shown in the widget gallery)
+    - getTimeline: this is where the timeline actually gets created. It consists of an Array of entries (the data)
+
+## Credits
+🙏🏽 Sean Allen
