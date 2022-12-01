@@ -21,10 +21,27 @@ This is a first small project to learn the fundamentals of how to create a simpl
     <a href="https://gitmoji.dev">
         <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=for-the-badge" alt="Gitmoji">
     </a>
+    <a href="https://github.com/conventional-commits/conventionalcommits.org">
+        <img src="https://img.shields.io/badge/Conventional%20Commits-📝-lightgrey.svg?style=for-the-badge" alt="Conventional Commits">
+    </a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/license-MIT-black.svg?style=for-the-badge" />
     </a>
 </p>
+
+---
+
+## Contents
+* [Functionality](#functionality)
+* [Tech Stack](#tech-stack)
+* [Frameworks](#frameworks)
+* [Device Compatibility](#device-compatibility)
+* [Screenshots](#screenshots)
+* [Learnings](#learnings)
+* [Code Comments](#code-comments)
+* [Credits](#credits)
+
+---
 
 ## Functionality
 A simple Date Widget that changes the day at midnight and its theme every month.
@@ -41,7 +58,7 @@ A simple Date Widget that changes the day at midnight and its theme every month.
 - iPhone >= iOS16
 - iPad >= iOS16
 
-## Screenshot
+## Screenshots
 ![Monthly Widget](monthly-theme-widget.png)
 
 ## Learnings
@@ -52,6 +69,9 @@ A simple Date Widget that changes the day at midnight and its theme every month.
     - placehoder: dummy data (in case there is no data from the snapshot eg. network call needed)
     - getSnapshot: how does the widget look right now (this state is shown in the widget gallery)
     - getTimeline: this is where the timeline actually gets created. It consists of an Array of entries (the data)
+
+## Code Comments
+I love putting in the effort of adding comments to my code, [here is why](https://www.youtube.com/watch?v=1NEa-OcsTow).
 
 ## Credits
 🙏🏽 Sean Allen
