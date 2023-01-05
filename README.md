@@ -4,16 +4,16 @@ This is a first small project to learn the fundamentals of how to create a simpl
 
 <p align="center">
     <a href="https://en.wikipedia.org/wiki/IOS">
-        <img src="https://img.shields.io/badge/iOS-16+-blue.svg?style=for-the-badge" />
+        <img src="https://img.shields.io/badge/iOS-16.1+-blue.svg?style=for-the-badge" />
     </a>
     <a href="https://www.swift.org/">
-        <img src="https://img.shields.io/badge/Swift-5.7.1-brightgreen.svg?style=for-the-badge&logo=swift" />
+        <img src="https://img.shields.io/badge/Swift-5.7.2-brightgreen.svg?style=for-the-badge&logo=swift" />
     </a>
     <a href="https://developer.apple.com/xcode/swiftui">
         <img src="https://img.shields.io/badge/SwiftUI-blue.svg?style=for-the-badge&logo=swift&logoColor=black" />
     </a>
     <a href="https://developer.apple.com/xcode">
-        <img src="https://img.shields.io/badge/Xcode-14.1-blue.svg?style=for-the-badge" />
+        <img src="https://img.shields.io/badge/Xcode-14.2-blue.svg?style=for-the-badge" />
     </a>
     <a href="https://mastodon.green/@simonberner">
         <img src="https://img.shields.io/badge/Contact-@simonberner-orange?style=for-the-badge" alt="mastodon.green/@simonberner" />
@@ -39,6 +39,7 @@ This is a first small project to learn the fundamentals of how to create a simpl
 * [Screenshots](#screenshots)
 * [Learnings](#learnings)
 * [Code Comments](#code-comments)
+* [Pull Requests](#pull-requests)
 * [Credits](#credits)
 
 ---
@@ -47,16 +48,16 @@ This is a first small project to learn the fundamentals of how to create a simpl
 A simple Date Widget that changes the day at midnight and its theme every month.
 
 ## Tech Stack
-- Xcode 14.1
-- Swift 5.7.1
+- Xcode 14.2
+- Swift 5.7.2
 
 ## Frameworks
 - SwiftUI
 - WidgetKit
 
 ## Device Compatibility
-- iPhone >= iOS16
-- iPad >= iOS16
+- iPhone >= iOS 16.1
+- iPad >= iOS 16.1
 
 ## Screenshots
 ![Monthly Widget](monthly-theme-widget.png)
@@ -72,6 +73,9 @@ A simple Date Widget that changes the day at midnight and its theme every month.
 
 ## Code Comments
 I love putting in the effort of adding comments to my code, [here is why](https://www.youtube.com/watch?v=1NEa-OcsTow).
+
+## Pull Requests
+When I create PRs I stick to [this guideline](https://www.youtube.com/watch?v=_sfzAOfY8uc).
 
 ## Credits
 🙏🏽 Sean Allen
