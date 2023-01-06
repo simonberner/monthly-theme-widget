@@ -1,6 +1,6 @@
 # Monthly Theme Widget
 
-This is a first small project to learn the fundamentals of how to create a simple Widget for iOS16+.
+This is a first small project to learn the fundamentals of how to create a simple Widget with an intent and configuration for iOS 16+.
 
 <p align="center">
     <a href="https://en.wikipedia.org/wiki/IOS">
@@ -60,7 +60,17 @@ A simple Date Widget that changes the day at midnight and its theme every month.
 - iPad >= iOS 16.1
 
 ## Screenshots
-![Monthly Widget](monthly-theme-widget.png)
+| Widget Normal Font | Intent |
+| :---: | :---: |
+| <img src="AppScreenshots/MonthlyWidgetNormalFont.png" height="100%" width="100%" > | <img src="AppScreenshots/MonthlyWidgetIntent.png" height="100%" width="100%" > |
+
+| Configuration | Widget Fun Font |
+| :---: | :---: |
+| <img src="AppScreenshots/MonthlyWidgetConfiguration.png" height="100%" width="100%" > | <img src="AppScreenshots/MonthlyWidgetFunFont.png" height="100%" width="100%" > |
+
+| Different Days Overview |
+| :---: |
+| <img src="AppScreenshots/MonthlyWidgetAll.png" height="100%" width="100%" > |
 
 ## Learnings
 - A Widget comes in 4 "fixed" sizes: systemSmall, systemMedium, systemLarge, systemExtraLarge
@@ -70,6 +80,13 @@ A simple Date Widget that changes the day at midnight and its theme every month.
     - placehoder: dummy data (in case there is no data from the snapshot eg. network call needed)
     - getSnapshot: how does the widget look right now (this state is shown in the widget gallery)
     - getTimeline: this is where the timeline actually gets created. It consists of an Array of entries (the data)
+### Fonts
+- [Best Free Fonts for iOS app](https://sarunw.com/posts/free-fonts-ios/)
+- [List all fonts available on iOS device in console](https://gist.github.com/simonbromberg/24a48fb5e94b2bde82df1e5c97e733da)
+- [Old list of iOS fonts](http://iosfonts.com/)
+### Widget Intent & Configuration
+- 1. Create a intent definition file add some intents with parameters
+- 2. Add the IntentConfiguration to the Widget, which then takes in a IntentTimelineProvider
 
 ## Code Comments
 I love putting in the effort of adding comments to my code, [here is why](https://www.youtube.com/watch?v=1NEa-OcsTow).
