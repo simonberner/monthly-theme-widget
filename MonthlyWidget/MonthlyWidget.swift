@@ -11,19 +11,22 @@ import Intents
 
 // Provides the Timeline
 struct Provider: IntentTimelineProvider {
+
     func placeholder(in context: Context) -> DayEntry {
-        DayEntry(date: Date(), configuration: ConfigurationIntent())
+        DayEntry(date: Date(), showFunFont: false)
     }
 
-    // give me a snapshot how the widget looks right now
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (DayEntry) -> ()) {
-        let entry = DayEntry(date: Date(), configuration: configuration)
+    // Snapshot for the widget gallery
+    func getSnapshot(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (DayEntry) -> Void) {
+        let entry = DayEntry(date: Date(), showFunFont: false)
         completion(entry)
     }
 
     // A timeline is an Array of entries
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (Timeline<DayEntry>) -> Void) {
         var entries: [DayEntry] = []
+
+        let showFunFont = configuration.funFont == 1 // showFunFont = true, else false
 
         // Generate a timeline consisting of seven entries a day apart, starting from the current date.
         let currentDate = Date() // the current date is the date AND the time (eg. 24/8 2:50pm)
@@ -35,7 +38,7 @@ struct Provider: IntentTimelineProvider {
             // so we set the start of the day to midnight (and not some random time)
             let startOfDate = Calendar.current.startOfDay(for: entryDate)
             print("startOfDate: \(startOfDate)")
-            let entry = DayEntry(date: startOfDate, configuration: configuration)
+            let entry = DayEntry(date: startOfDate, showFunFont: showFunFont)
             entries.append(entry) // adds 7 day entries
         }
 
@@ -47,13 +50,14 @@ struct Provider: IntentTimelineProvider {
 // Data Model - populate the data with
 struct DayEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationIntent
+    let showFunFont: Bool
 }
 
 // The SwiftUI view
 struct MonthlyWidgetEntryView : View {
     var entry: DayEntry
     var config: MonthConfig
+    let funFontName = "Chalkduster"
 
     init(entry: DayEntry) {
         self.entry = entry
@@ -70,7 +74,7 @@ struct MonthlyWidgetEntryView : View {
                     Text(config.emojiText)
                         .font(.title)
                     Text(entry.date.weekdayDisplayFormat)
-                        .font(.title2)
+                        .font(entry.showFunFont ? .custom(funFontName, size: 20) : .title3)
                         .fontWeight(.bold)
                         .minimumScaleFactor(0.6)
                         .foregroundColor(config.weekdayTextColor)
@@ -78,7 +82,7 @@ struct MonthlyWidgetEntryView : View {
                 }
 
                 Text(entry.date.dayDisplayFormat)
-                    .font(.system(size: 80, weight: .heavy))
+                    .font(entry.showFunFont ? .custom(funFontName, size: 80) : .system(size: 80, weight: .heavy))
                     .foregroundColor(config.dayTextColor)
             }
             .padding()
@@ -96,7 +100,7 @@ struct MonthlyWidget: Widget {
          content closure.
          (The content closure contains the SwiftUI views that WidgetKit needs to render the widget. When WidgetKit invokes the content closure, it passes a timeline entry created by the widget provider’s getSnapshot(for:in:completion:) or getTimeline(for:in:completion:) method.)
          */
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: ChangeFontIntent.self, provider: Provider()) { entry in
             MonthlyWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Monthly Style Widget")
@@ -107,7 +111,7 @@ struct MonthlyWidget: Widget {
 
 struct MonthlyWidget_Previews: PreviewProvider {
     static var previews: some View {
-        MonthlyWidgetEntryView(entry: DayEntry(date: dateToDisplay(month: 10, day: 10), configuration: ConfigurationIntent()))
+        MonthlyWidgetEntryView(entry: DayEntry(date: dateToDisplay(month: 10, day: 10), showFunFont: true))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 
