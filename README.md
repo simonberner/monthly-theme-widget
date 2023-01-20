@@ -1,6 +1,4 @@
-# Monthly Theme Widget
-
-This is a first small project to learn the fundamentals of how to create a simple Widget with an intent and configuration for iOS 16+.
+<h1 align=center>Monthly Theme Widget</h1>
 
 <p align="center">
     <a href="https://en.wikipedia.org/wiki/IOS">
@@ -28,6 +26,8 @@ This is a first small project to learn the fundamentals of how to create a simpl
         <img src="https://img.shields.io/badge/license-MIT-black.svg?style=for-the-badge" />
     </a>
 </p>
+
+This is a first small project to learn the fundamentals of how to create a simple Widget with an intent and configuration for iOS 16+.
 
 ---
 
@@ -96,3 +96,8 @@ When I create PRs I stick to [this guideline](https://www.youtube.com/watch?v=_s
 
 ## Credits
 🙏🏽 Sean Allen
+
+<hr>
+<p align="center">
+Made with a 🙂 <a href="https://simonberner.dev">Simon Berner
+</p>
