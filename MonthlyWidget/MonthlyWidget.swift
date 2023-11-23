@@ -55,6 +55,10 @@ struct DayEntry: TimelineEntry {
 
 // The SwiftUI view
 struct MonthlyWidgetEntryView : View {
+    // If false (it is in StandBy mode: it is not showing the background) means there is no padding
+    @Environment(\.showsWidgetContainerBackground) var showsBackground
+    // If it is true (when mode is .vibrant), means it is in StandBy Night Mode
+//    @Environment(\.widgetRenderingMode) var renderingMode
     var entry: DayEntry
     var config: MonthConfig
     let funFontName = "Chalkduster"
@@ -65,27 +69,29 @@ struct MonthlyWidgetEntryView : View {
     }
 
     var body: some View {
-        ZStack {
+        VStack(spacing: 4) {
+            HStack {
+                Text(config.emojiText)
+                    .font(.title)
+                Text(entry.date.weekdayDisplayFormat)
+                    .font(entry.showFunFont ? .custom(funFontName, size: 20) : .title3)
+                    .fontWeight(.bold)
+                    .minimumScaleFactor(0.6)
+                    .foregroundStyle(showsBackground ? config.weekdayTextColor : .white)
+                Spacer()
+            }
+            .id(entry.date)
+            .transition(.push(from: .trailing))
+            .animation(.bouncy, value: entry.date)
+
+            Text(entry.date.dayDisplayFormat)
+                .font(entry.showFunFont ? .custom(funFontName, size: 80) : .system(size: 80, weight: .heavy))
+                .foregroundStyle(showsBackground ? config.dayTextColor : .white)
+                .contentTransition(.numericText())
+        }
+        .containerBackground(for: .widget) {
             ContainerRelativeShape()
                 .fill(config.backgroundColor.gradient)
-
-            VStack(spacing: 4) {
-                HStack {
-                    Text(config.emojiText)
-                        .font(.title)
-                    Text(entry.date.weekdayDisplayFormat)
-                        .font(entry.showFunFont ? .custom(funFontName, size: 20) : .title3)
-                        .fontWeight(.bold)
-                        .minimumScaleFactor(0.6)
-                        .foregroundColor(config.weekdayTextColor)
-                    Spacer()
-                }
-
-                Text(entry.date.dayDisplayFormat)
-                    .font(entry.showFunFont ? .custom(funFontName, size: 80) : .system(size: 80, weight: .heavy))
-                    .foregroundColor(config.dayTextColor)
-            }
-            .padding()
         }
     }
 }
@@ -106,22 +112,18 @@ struct MonthlyWidget: Widget {
         .configurationDisplayName("Monthly Style Widget")
         .description("The theme of the widget changes based on the month.")
         .supportedFamilies([.systemSmall])
+//        .disfavoredLocations([.lockScreen], for: [.systemSmall]) // Tweak where a widget should not show up
     }
 }
 
-struct MonthlyWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        MonthlyWidgetEntryView(entry: DayEntry(date: dateToDisplay(month: 10, day: 10), showFunFont: true))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-
-    // helper to test it
-    static func dateToDisplay(month: Int, day: Int) -> Date {
-        let components = DateComponents(calendar: Calendar.current, year: 2022, month: month, day: day)
-
-        return Calendar.current.date(from: components)!
-    }
-}
+#Preview(as: .systemSmall, widget: {
+    MonthlyWidget()
+}, timeline: {
+    MockData.dayOne
+    MockData.dayTwo
+    MockData.dayThree
+    MockData.dayFour
+})
 
 extension Date {
     var weekdayDisplayFormat: String {
@@ -130,5 +132,19 @@ extension Date {
 
     var dayDisplayFormat: String {
         self.formatted(.dateTime.day())
+    }
+}
+
+struct MockData {
+    static let dayOne = DayEntry(date: dateToDisplay(month: 11, day: 4), showFunFont: false)
+    static let dayTwo = DayEntry(date: dateToDisplay(month: 11, day: 5), showFunFont: false)
+    static let dayThree = DayEntry(date: dateToDisplay(month: 11, day: 6), showFunFont: false)
+    static let dayFour = DayEntry(date: dateToDisplay(month: 11, day: 7), showFunFont: false)
+
+    // helper to test it
+    private static func dateToDisplay(month: Int, day: Int) -> Date {
+        let components = DateComponents(calendar: Calendar.current, year: 2022, month: month, day: day)
+
+        return Calendar.current.date(from: components)!
     }
 }
