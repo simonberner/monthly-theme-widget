@@ -2,16 +2,16 @@
 
 <p align="center">
     <a href="https://en.wikipedia.org/wiki/IOS">
-        <img src="https://img.shields.io/badge/iOS-16.1+-blue.svg?style=for-the-badge" />
+        <img src="https://img.shields.io/badge/iOS-17+-blue.svg?style=for-the-badge" />
     </a>
     <a href="https://www.swift.org/">
-        <img src="https://img.shields.io/badge/Swift-5.7.2-brightgreen.svg?style=for-the-badge&logo=swift" />
+        <img src="https://img.shields.io/badge/Swift-5.9-brightgreen.svg?style=for-the-badge&logo=swift" />
     </a>
     <a href="https://developer.apple.com/xcode/swiftui">
         <img src="https://img.shields.io/badge/SwiftUI-blue.svg?style=for-the-badge&logo=swift&logoColor=black" />
     </a>
     <a href="https://developer.apple.com/xcode">
-        <img src="https://img.shields.io/badge/Xcode-14.2-blue.svg?style=for-the-badge" />
+        <img src="https://img.shields.io/badge/Xcode-15.0-blue.svg?style=for-the-badge" />
     </a>
     <a href="https://mastodon.green/@simonberner">
         <img src="https://img.shields.io/badge/Contact-@simonberner-orange?style=for-the-badge" alt="mastodon.green/@simonberner" />
@@ -27,7 +27,7 @@
     </a>
 </p>
 
-This is a first small project to learn the fundamentals of how to create a simple Widget with an intent and configuration for iOS 16+.
+A small project to learn the fundamentals of how to create a simple Widget with an intent and configuration for iOS 17+.
 
 ---
 
@@ -45,19 +45,19 @@ This is a first small project to learn the fundamentals of how to create a simpl
 ---
 
 ## Functionality
-A simple Date Widget that changes the day at midnight and its theme every month.
+A simple Date Widget that changes the day at midnight and its theme every month. With iOS17+ it is also available in the [StandBy mode](https://support.apple.com/en-gb/guide/iphone/iph878d77632/ios).
 
 ## Tech Stack
-- Xcode 14.2
-- Swift 5.7.2
+- Xcode 15.0
+- Swift 5.9
 
 ## Frameworks
 - SwiftUI
 - WidgetKit
 
 ## Device Compatibility
-- iPhone >= iOS 16.1
-- iPad >= iOS 16.1
+- iPhone with iOS 17+
+- iPad with iOS 17+
 
 ## Screenshots
 | Widget Normal Font | Intent |
@@ -95,7 +95,7 @@ I love putting in the effort of adding comments to my code, [here is why](https:
 When I create PRs I stick to [this guideline](https://www.youtube.com/watch?v=_sfzAOfY8uc).
 
 ## Credits
-🙏🏽 Sean Allen
+🙏🏽 Sean Allen iOS Courses
 
 <hr>
 <p align="center">
