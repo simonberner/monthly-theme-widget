@@ -68,6 +68,10 @@ A simple Date Widget that changes the day at midnight and its theme every month.
 | :---: | :---: |
 | <img src="AppScreenshots/MonthlyWidgetConfiguration.png" height="100%" width="100%" > | <img src="AppScreenshots/MonthlyWidgetFunFont.png" height="100%" width="100%" > |
 
+| StandBy Mode (iOS17) |
+| :---: |
+| <img src="AppScreenshots/MonthlyWidgetStandBy.png" height="100%" width="100%" > |
+
 | Different Days Overview |
 | :---: |
 | <img src="AppScreenshots/MonthlyWidgetAll.png" height="100%" width="100%" > |
