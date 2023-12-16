@@ -98,6 +98,13 @@ I love putting in the effort of adding comments to my code, [here is why](https:
 ## Pull Requests
 When I create PRs I stick to [this guideline](https://www.youtube.com/watch?v=_sfzAOfY8uc).
 
+## FAQ
+### Whats new for this App with iOS17?
+- App Intents for Widget-Configuration and interactive Widgets
+### Why is this App iOS17+ only?
+- Because I want to be able the new way of implementing App Intents in code rather than using the SiriKit definition file (prior to iOS17).
+- Because I don't want to fidle around with ``if #available(iOS 17, *) {...}``
+
 ## Credits
 🙏🏽 Sean Allen iOS Courses
 
