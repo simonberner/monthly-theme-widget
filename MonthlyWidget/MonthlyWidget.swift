@@ -8,25 +8,24 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import AppIntents
 
 // Provides the Timeline
-struct Provider: IntentTimelineProvider {
-
+struct Provider: AppIntentTimelineProvider {
+    
     func placeholder(in context: Context) -> DayEntry {
         DayEntry(date: Date(), showFunFont: false)
     }
-
+    
     // Snapshot for the widget gallery
-    func getSnapshot(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (DayEntry) -> Void) {
-        let entry = DayEntry(date: Date(), showFunFont: false)
-        completion(entry)
+    func snapshot(for configuration: ChangeFontIntent, in context: Context) async -> DayEntry {
+        DayEntry(date: Date(), showFunFont: false)
     }
-
+    
     // A timeline is an Array of entries
-    func getTimeline(for configuration: ChangeFontIntent, in context: Context, completion: @escaping (Timeline<DayEntry>) -> Void) {
+    func timeline(for configuration: ChangeFontIntent, in context: Context) async -> Timeline<DayEntry> {
         var entries: [DayEntry] = []
-
-        let showFunFont = configuration.funFont == 1 // showFunFont = true, else false
+        let showFunFont = configuration.funFont
 
         // Generate a timeline consisting of seven entries a day apart, starting from the current date.
         let currentDate = Date() // the current date is the date AND the time (eg. 24/8 2:50pm)
@@ -42,8 +41,7 @@ struct Provider: IntentTimelineProvider {
             entries.append(entry) // adds 7 day entries
         }
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        return Timeline(entries: entries, policy: .atEnd)
     }
 }
 
@@ -101,12 +99,7 @@ struct MonthlyWidget: Widget {
     let kind: String = "MonthlyWidget"
 
     var body: some WidgetConfiguration {
-        /*
-         The IntentTimelineProvider (Provider) from above returns an entry (from getSnapshot) which is passed in to the
-         content closure.
-         (The content closure contains the SwiftUI views that WidgetKit needs to render the widget. When WidgetKit invokes the content closure, it passes a timeline entry created by the widget provider’s getSnapshot(for:in:completion:) or getTimeline(for:in:completion:) method.)
-         */
-        IntentConfiguration(kind: kind, intent: ChangeFontIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: ChangeFontIntent.self, provider: Provider()) { entry in
             MonthlyWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Monthly Style Widget")
@@ -124,6 +117,15 @@ struct MonthlyWidget: Widget {
     MockData.dayThree
     MockData.dayFour
 })
+
+// As the App Intent for the MonthlyWidget is quite simple, we keep it here with the Widget
+struct ChangeFontIntent: AppIntent, WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "Fun Font"
+    static var description: IntentDescription? = .init(stringLiteral: "Switch to a fun font")
+    
+    @Parameter(title: "Fun Font")
+    var funFont: Bool
+}
 
 extension Date {
     var weekdayDisplayFormat: String {
